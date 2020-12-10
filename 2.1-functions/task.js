@@ -46,31 +46,24 @@ showSolutionsMessage(2, 4, 2);
 
 // task 2
 function getAverageScore(data) {
-    let localObject = {average :0};
-    let subjects = [
-    'algebra',
-    'geometry',
-    'russian',
-    'physics',
-    'music',
-    'english',
-    'poetry',
-    'chemistry',
-    'french'];
-    
+    let localObject = {};  
     let totalAverage = 0;
 
     if (Object.keys(data).length === 0)
     {
+        localObject.average = 0;
         return localObject;
     }
 
-    for(i = 0; i < 9; i++) {
-        localObject[subjects[i]] = getAverageMark(data[subjects[i]]);
-        totalAverage += localObject[subjects[i]];
+    for (let property in data)
+    {
+        let value = data[property];
+        //console.log(`Свойство ${property}, значение: ${value}`);
+        localObject[property] = getAverageMark(data[property]),
+        totalAverage += localObject[property];
     }
 
-    localObject.average = totalAverage/9;
+    localObject.average = totalAverage/Object.keys(data).length;
     return localObject;
 }
 
@@ -81,14 +74,6 @@ function getAverageMark(marks) {
     if(marks.length === 0) {
         return 0; 
     }
-    // if (Array.isArray(marks)) { 
-    //    if(marks.length === 0) {
-    //     return 0;
-    //    }
-    // } 
-    // else {
-    //     return 0;
-    // }
 
     for (let i = 0; i < marks.length; i++) {
         total += marks[i];
