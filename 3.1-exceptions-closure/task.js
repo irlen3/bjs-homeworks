@@ -1,13 +1,13 @@
 // task 1
 const parseCount = (data) => {
-    //let result =;  // Number.parseInt разбирает строковый аргумент и возвращает целое число
-    if (isNaN(Number.parseInt(data))) { //  проверяем если результатом парсинга является значение NaN, то выбрасываем исключение с ошибкой "Невалидное значение".
-        // throw new Error ("Невалидное значение");
-        const vaildError = new Error("Невалидное значение");
-        this.vaildError = vaildError;
-        throw vaildError;
+    let result = Number.parseInt(data);  // Number.parseInt разбирает строковый аргумент и возвращает целое число
+    if (isNaN(result)) { //  проверяем если результатом парсинга является значение NaN, то выбрасываем исключение с ошибкой "Невалидное значение".
+        throw new Error ("Невалидное значение");
+        // const vaildError = new Error("Невалидное значение");
+        // this.vaildError = vaildError;
+        // throw vaildError;
     }
-    return Number.parseInt(data);// возвращаем результат парсинга функции       
+    return result;// возвращаем результат парсинга функции       
 }
 
 const validateCount = (data) => {
@@ -17,13 +17,11 @@ const validateCount = (data) => {
 // Перехватывайте исключение, которое может выбрасывать функция parseCount.
 // Возвращайте ошибку из функции в случае перехвата исключения.
         try {
-            //let result = parseCount(data);
-            return parseCount(data);
+            let result = parseCount(data);
+            return result;
         } 
-        catch(e){
-           // if (result != NaN)
-            // console.log('Ошибка произошла!');
-            return this.vaildError;
+        catch(e) {
+           return "Невалидное значение";
         }
 }
 
@@ -42,26 +40,15 @@ class Triangle {
 
     // Метод getPerimeter должен возвращать периметр треугольника
     getPerimeter() {
-        try {
         return this.a + this.b + this.c;
-      }
-        catch(e) {
-            return 'Ошибка! Треугольник не существует'; 
-        }
     }
 
     // Метод getArea должен возвращать площадь треугольника (для подсчёта площади воспользуйтесь формулой Герона).
     getArea() {
-       try {
-            let p = 1 / 2 * (this.a + this.b + this.c); // полупериметр
+            let p = 1 / 2 * this.getPerimeter(); // полупериметр
             let area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)); // Math.sqrt - квадратный корень
-            area = + area.toFixed(3); // '+' - преобразование к числовому типу
-            return area;
-        }
-        catch(e) {
-            return 'Ошибка! Треугольник не существует';
-        }
-       
+            area = Number(area.toFixed(3)); // '+' - преобразование к числовому типу
+            return area;     
    }
 }
 
@@ -70,8 +57,8 @@ const getTriangle = (a, b, c) => {
     // Попытайтесь вернуть новый объект треугольника.
     // В случае перехвата исключения возвращайте объект с двумя методами getArea и getPerimeter, которые возвращают строку: "Ошибка! Треугольник не существует".
     try {
-        const triangle = new Triangle(a, b, c);    
-        return triangle;
+        //const triangle = new Triangle(a, b, c);    
+        return triangle = new Triangle(a, b, c);
     } 
     catch(e){
         return {
