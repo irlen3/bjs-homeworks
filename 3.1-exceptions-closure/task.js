@@ -21,7 +21,7 @@ const validateCount = (data) => {
             return result;
         } 
         catch(e) {
-           return "Невалидное значение";
+            return e;
         }
 }
 
